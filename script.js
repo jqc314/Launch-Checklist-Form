@@ -55,7 +55,7 @@ window.addEventListener("load", function() {
       ).innerHTML = `Copilot ${copilot.value} is ready for launch`;
       document.getElementById("fuelStatus").innerHTML =
         "Fuel level too low for launch";
-    } else if  (cargoTest > 10000) {
+    } else if (cargoTest > 10000) {
       document.getElementById("launchStatus").style.color = "red";
       document.getElementById("faultyItems").style.visibility = "visible";
       document.getElementById(
@@ -66,6 +66,11 @@ window.addEventListener("load", function() {
       ).innerHTML = `Pilot ${pilot.value} is ready for launch.`;
       document.getElementById("cargoStatus").innerHTML =
         "Mass to high for shuttle to launch";
+    } else if (cargoTest <= 10000 && fuelTest >= 10000) {
+      document.getElementById("launchStatus").style.color = "green";
+      document.getElementById("faultyItems").style.visibility = "visible";
+      document.getElementById("launchStatus").innerHTML =
+        "Shuttle ready for launch!";
     }
     fetch("https://handlers.education.launchcode.org/static/planets.json").then(
       function(response) {
@@ -77,7 +82,7 @@ window.addEventListener("load", function() {
           for (mission of json) {
             let missionHTML = `<h2>Mission Destination</h2>
           <ol>
-             <li>Name: ${mission.name}</li>
+             <li>Name: ${mission.name}</li> 
              <li>Diameter: ${mission.diameter}</li>
              <li>Star: ${mission.star}</li>
              <li>Distance from Earth: ${mission.distance}</li>
